@@ -1,24 +1,64 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../index.css";
 import AddQueue from "./addQueue";
 import Header from "./header";
 import Footer from "./footer";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-import { Track } from "../interfaces";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Track, currentPlayingObject } from "../interfaces";
 
 const Wrapper: React.FC<{}> = () => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<Track>();
   const [myQueue, setMyQueue] = useState<Track[]>([]);
+  const [currentPlaying, setCurrentPlaying] = useState<currentPlayingObject>();
+  const [message, setMessage] = useState<{ message: string; error: boolean }>({
+    error: false,
+    message: "",
+  });
+  const messageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let mover1: NodeJS.Timeout, mover2: NodeJS.Timeout;
+
+    const timeForMessageMS = 4500;
+    if (message.message !== "" && messageRef.current) {
+      if (message.error) {
+        messageRef.current.classList.add("error_message");
+      }
+      messageRef.current?.classList.add("message_open");
+      mover1 = setTimeout(() => {
+        messageRef.current?.classList.remove("message_open");
+      }, timeForMessageMS);
+      mover2 = setTimeout(() => {
+        setMessage({ error: false, message: "" });
+        messageRef.current?.classList.remove("error_message");
+      }, timeForMessageMS + 1000);
+    }
+
+    return () => {
+      clearTimeout(mover1);
+      clearTimeout(mover2);
+    };
+  }, [message]);
+
   return (
     <div className="wrapper">
-      <Header myQueue={myQueue} setMyQueue={setMyQueue} />
+      <Header
+        currentPlaying={currentPlaying}
+        setCurrentPlaying={setCurrentPlaying}
+        myQueue={myQueue}
+        setMyQueue={setMyQueue}
+      />
       <Router>
         <Routes>
           <Route
             element={
               <AddQueue
+                message={message}
+                setMessage={setMessage}
+                currentPlaying={currentPlaying}
+                setCurrentPlaying={setCurrentPlaying}
                 myQueue={myQueue}
                 setMyQueue={setMyQueue}
                 selectedTrack={selectedTrack}
@@ -42,6 +82,9 @@ const Wrapper: React.FC<{}> = () => {
         </Routes>
       </Router>
       <Footer />
+      <div ref={messageRef} className="message ">
+        <h3>{message.message}</h3>
+      </div>
     </div>
   );
 };

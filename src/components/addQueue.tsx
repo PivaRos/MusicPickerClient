@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import "../index.css";
 import { HOST, SERVER_PORT } from "../envVars";
-import { SearchResult, Track } from "../interfaces";
+import { SearchResult, Track, currentPlayingObject } from "../interfaces";
 import axios from "axios";
+import { MyQueue } from "./myQueue";
+import { error } from "console";
+import AdComponent from "./adComponent";
 
 interface AddQueueProps {
   query: string;
@@ -15,6 +18,22 @@ interface AddQueueProps {
 
   myQueue: Track[];
   setMyQueue: React.Dispatch<React.SetStateAction<Track[]>>;
+
+  setCurrentPlaying: React.Dispatch<
+    React.SetStateAction<currentPlayingObject | undefined>
+  >;
+  currentPlaying: currentPlayingObject | undefined;
+
+  message: {
+    message: string;
+    error: boolean;
+  };
+  setMessage: React.Dispatch<
+    React.SetStateAction<{
+      message: string;
+      error: boolean;
+    }>
+  >;
 }
 
 const AddQueue = ({
@@ -26,6 +45,10 @@ const AddQueue = ({
   setSelectedTrack,
   myQueue,
   setMyQueue,
+  currentPlaying,
+  setCurrentPlaying,
+  message,
+  setMessage,
 }: AddQueueProps) => {
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -45,23 +68,10 @@ const AddQueue = ({
           `http://${HOST}:${SERVER_PORT}/search/${query}`,
           {}
         );
-        console.log(result.data);
         setSearchResults(result.data);
       }
     } catch {}
   };
-
-  useEffect(() => {
-    let listener;
-    if (drawerRef.current) {
-      listener = drawerRef.current.addEventListener("blur", () => {
-        drawerRef.current?.classList.remove("drawer_open");
-      });
-    }
-    return drawerRef.current && listener !== undefined
-      ? drawerRef.current.removeEventListener("blur", listener)
-      : undefined;
-  }, []);
 
   const TrackClick = (Track: Track) => {
     setSelectedTrack(Track);
@@ -70,40 +80,37 @@ const AddQueue = ({
 
   return (
     <div className="addQueue">
+      <AdComponent />
       <div className="binder_input_results">
         <div className="input_div">
           <input
+            placeholder="חפש מוזיקה"
             className="search-input"
             value={query}
             onChange={(text) => setQuery(text.target.value)}
           />
         </div>
-        {myQueue.length > 0 && (
-          <div className="my_queue">
-            <h4>התור שלי</h4>
-            {myQueue.map((Track) => {
-              return (
-                <div>
-                  <h3>{Track.name}</h3>
-                  <h4>{Track.artists}</h4>
-                </div>
-              );
-            })}
-          </div>
-        )}
+        <MyQueue
+          currentPlaying={currentPlaying}
+          setCurrentPlaying={setCurrentPlaying}
+          myQueue={myQueue}
+          setMyQueue={setMyQueue}
+        />
         <div>
-          <ul className="results-ui">
-            {searchResults.map((result: SearchResult, index: number) => {
-              return (
-                <li key={"tack-" + index} className="result-li">
-                  <div onClick={() => TrackClick(result)}>
-                    <h3>{result.name}</h3>
-                    <h4>{result.artists}</h4>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
+          {query.length > 2 && (
+            <ul className="results-ui">
+              {searchResults.map((result: SearchResult, index: number) => {
+                return (
+                  <li key={"track-" + index} className="result-li">
+                    <div onClick={() => TrackClick(result)}>
+                      <h3>{result.name}</h3>
+                      <h4>{result.artists}</h4>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
       </div>
       <div ref={drawerRef} className="addToQueue_drawer">
@@ -131,37 +138,51 @@ const AddQueue = ({
               const result = await axios.get(
                 `http://${HOST}:${SERVER_PORT}/queue/add/${selectedTrack?.uri}`
               );
-              console.log(result.status);
               if (result.status === 200) {
                 drawerRef.current?.classList.remove("drawer_open");
-                setMyQueue((queue) => {
-                  if (selectedTrack) queue.push(selectedTrack);
-                  return queue;
+                setQuery("");
+                setSearchResults([]);
+                setMessage({
+                  message: "השיר נוסף בהצלחה לרשימה",
+                  error: false,
                 });
-              } else {
-                if (result.status === 500) {
-                  // error mess
-                }
-                if (result.status === 429) {
-                  //message to many requests
-                }
-                if (result.status === 400) {
-                  if (
-                    result.data.error_type &&
-                    result.data.error_type === "ALREADY_ADD"
-                  ) {
-                    console.log("already add track in the last round");
-                    //already add message
-                  }
-                  if (
-                    result.data.error_type &&
-                    result.data.error_type === "GENRE_NOT_ALLOWED"
-                  ) {
-                    //genre not allowed message
-                  }
-                }
+                //handle myQueue;
               }
-            } catch {}
+            } catch (e: any) {
+              switch (e.response.status) {
+                case 500:
+                  setMessage({
+                    message: "אופס נראה שקרתה תקלה אנא נסה שנית מאוחר יותר",
+                    error: true,
+                  });
+                  break;
+                case 429:
+                  setMessage({
+                    message: "המערכת עמוסה השירות לא זמין כרגע ):",
+                    error: true,
+                  });
+                  break;
+                case 400:
+                  if (e.response.data.error_type === "ALREADY_ADD") {
+                    setMessage({
+                      message: "כבר הוספת שיר לסבב זה",
+                      error: true,
+                    });
+                  } else {
+                    setMessage({
+                      message: "ז'אנר של השיר לא מקובל",
+                      error: true,
+                    });
+                  }
+                  break;
+                case 503:
+                  setMessage({
+                    message: "שיר זה קיים כבר בסבב זה",
+                    error: true,
+                  });
+                  break;
+              }
+            }
           }}
           className="add_To_Queue"
         >

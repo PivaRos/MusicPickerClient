@@ -22,4 +22,5 @@ export interface currentPlayingObject {
   name: string;
   genres: string[];
   artists: string[];
+  queue: Track[];
 }

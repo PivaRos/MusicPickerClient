@@ -14,16 +14,19 @@ body{
     height: 100vh;
     width: 100vw;
     background-color: white;
+    overflow: hidden;
 
 }
 .addQueue{
-    height: 100vh;
+    height: calc(100vh - 200px);
+    top:200px;
+    position: absolute;
     width: 100vw;
     background-color: white;
     justify-content: center;
     display: flex;
     flex-direction: row;
-
+overflow-y: hidden;
 }
 
 .search-input{
@@ -38,6 +41,7 @@ body{
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    text-align: right;
 }
 
 .search-input:hover{
@@ -52,12 +56,14 @@ body{
     background-color: lightgreen;
 }
 .header-container{
+    position: fixed
+    ;top:0;
     justify-content: center;
     display: flex;
     width: 100vw;
 }
 .results-ui{
-    overflow-y:scroll;
+    overflow-y:visible;
 }
 
 .result-li{
@@ -149,8 +155,10 @@ body{
   }
 
   
+  
   .addToQueue_drawer{
-      height: calc(100vh - 110px);
+    overflow-y: hidden;
+      height: calc(100vh - 220px);
       width: calc(100vw - 20px);
       margin:10px;
       background-color: white;
@@ -212,7 +220,7 @@ body{
     color: white;
 }
 .image_add_queue{
-    margin-top: calc((100vh - 110px) / 3.2)
+    margin-top: calc((100vh - 220px) / 3.2)
 }
 .center{
     text-align: center;
@@ -220,4 +228,48 @@ body{
 
 .margin-top{
     margin-top: 15px;
+}
+
+.message{
+         width:100vw;
+         background-color: lightgreen;
+         height: 50px;
+         position: absolute;
+         bottom: 0;
+         text-align: center;
+         transform: translateY(50px);
+         -webkit-transform: translateY(50px);
+         -moz-transform: translateY(50px);
+         -ms-transform: translateY(50px);
+         -o-transform: translateY(50px);
+         transition:1.0s ease ;
+         -webkit-transition:1.0s ease ;
+         -moz-transition:1.0s ease ;
+         -ms-transition:1.0s ease ;
+         -o-transition:1.0s ease ;
+         z-index: 1000;
+         overflow-y: hidden;
+}
+
+.error_message{
+    background-color: lightcoral;
+}
+
+.message h3{
+    margin-top: 13px;
+    color:black;
+    font-weight: 400;
+}
+
+
+.message_open{
+    transform: translateY(0px);
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    -o-transform: translateY(0px);
+}
+
+html{
+    overflow: hidden;
 }

@@ -7,11 +7,18 @@ import { HOST, SERVER_PORT, UPDATE_MS } from "../envVars";
 interface HeaderProps {
   myQueue: Track[];
   setMyQueue: React.Dispatch<React.SetStateAction<Track[]>>;
+  setCurrentPlaying: React.Dispatch<
+    React.SetStateAction<currentPlayingObject | undefined>
+  >;
+  currentPlaying: currentPlayingObject | undefined;
 }
 
-const Header = ({ myQueue, setMyQueue }: HeaderProps) => {
-  const [currentPlaying, setCurrentPlaying] = useState<currentPlayingObject>();
-
+const Header = ({
+  myQueue,
+  setMyQueue,
+  currentPlaying,
+  setCurrentPlaying,
+}: HeaderProps) => {
   const checkState = async () => {
     try {
       //updatecurrentPlaying
@@ -25,26 +32,21 @@ const Header = ({ myQueue, setMyQueue }: HeaderProps) => {
     }
   };
 
-  useEffect(() => {
-    if (!currentPlaying || myQueue.length === 0) return;
-    for (let i = 0; i < myQueue.length; i++) {
-      console.log(currentPlaying.name === myQueue[i].name);
-      console.log(
-        JSON.stringify(currentPlaying.artists) ===
-          JSON.stringify(myQueue[i].artists)
-      );
-      if (
-        currentPlaying.name === myQueue[i].name &&
-        JSON.stringify(currentPlaying.artists) ===
-          JSON.stringify(myQueue[i].artists)
-      ) {
-        setMyQueue((queue) => {
-          queue.splice(i, 1);
-          return queue;
-        });
-      }
-    }
-  }, [currentPlaying]);
+  // useEffect(() => {
+  //   if (!currentPlaying || myQueue.length === 0) return;
+  //   for (let i = 0; i < myQueue.length; i++) {
+  //     if (
+  //       currentPlaying.name === myQueue[i].name &&
+  //       JSON.stringify(currentPlaying.artists) ===
+  //         JSON.stringify(myQueue[i].artists)
+  //     ) {
+  //       setMyQueue((queue) => {
+  //         queue.splice(i, 1);
+  //         return queue;
+  //       });
+  //     }
+  //   }
+  // }, [currentPlaying]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
