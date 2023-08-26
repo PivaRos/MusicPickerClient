@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Track, currentPlayingObject } from "../interfaces";
 
 interface MyQueueProps {

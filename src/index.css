@@ -173,7 +173,7 @@ overflow-y: hidden;
   
   .addToQueue_drawer{
     overflow-y: hidden;
-      height: calc(100vh - 120px);
+      height: calc(100vh - 120px - 135px);
       width: calc(100vw - 20px);
       margin:10px;
       background-color: white;
@@ -222,7 +222,7 @@ overflow-y: hidden;
     height: 50px;
     background-color: rgb(118, 207, 118);
     position: absolute;
-    bottom: 100px;
+    bottom: 40px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -235,7 +235,7 @@ overflow-y: hidden;
     color: white;
 }
 .image_add_queue{
-    margin-top: calc((100vh - 220px) / 3.2)
+    margin-top: calc((100vh - 550px) / 3.2)
 }
 .center{
     text-align: center;
@@ -287,4 +287,41 @@ overflow-y: hidden;
 
 html{
     overflow: hidden;
+}
+
+
+.footer{
+    width: 100vw;
+    height: 50px;
+    background-color: lightgreen;
+    position: fixed;
+    bottom: 0;
+    display: grid;
+  grid-auto-flow: column; /* place grid items in columns */
+    justify-content: center;
+    column-gap: 45px;
+}
+.bottom_tab{
+
+    height: 50px;
+    width: 50px;
+    justify-content: center;
+    display: flex;
+    
+}
+
+.bottom_tab svg {
+    margin-top: 5px;
+    height: 30px;
+    width: 30px;
+    color: rgb(24, 44, 39);
+}
+
+.label-bottom-tab{
+    position: absolute;
+    text-align: center;
+    font-size: 10px;
+    bottom: 0;
+    color: rgb(24, 44, 39);
+
 }
