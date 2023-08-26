@@ -5,7 +5,6 @@ import { SearchResult, Track, currentPlayingObject } from "../interfaces";
 import axios from "axios";
 import { MyQueue } from "./myQueue";
 import { error } from "console";
-import AdComponent from "./adComponent";
 
 interface AddQueueProps {
   query: string;
@@ -80,11 +79,10 @@ const AddQueue = ({
 
   return (
     <div className="addQueue">
-      <AdComponent />
       <div className="binder_input_results">
         <div className="input_div">
           <input
-            placeholder="חפש מוזיקה"
+            placeholder="הוסף מוזיקה לרשימה"
             className="search-input"
             value={query}
             onChange={(text) => setQuery(text.target.value)}
@@ -96,15 +94,34 @@ const AddQueue = ({
           myQueue={myQueue}
           setMyQueue={setMyQueue}
         />
-        <div>
+        <div className="myQueue">
+          {myQueue.length > 0 && (
+            <MyQueue
+              currentPlaying={currentPlaying}
+              myQueue={myQueue}
+              setCurrentPlaying={setCurrentPlaying}
+              setMyQueue={setMyQueue}
+            />
+          )}
           {query.length > 2 && (
             <ul className="results-ui">
               {searchResults.map((result: SearchResult, index: number) => {
                 return (
                   <li key={"track-" + index} className="result-li">
-                    <div onClick={() => TrackClick(result)}>
-                      <h3>{result.name}</h3>
-                      <h4>{result.artists}</h4>
+                    <div
+                      className="results-div"
+                      onClick={() => TrackClick(result)}
+                    >
+                      <img
+                        className="image-results"
+                        src={result.images[0].url}
+                        height="35px"
+                        width="35px"
+                      />
+                      <div>
+                        <h3>{result.name}</h3>
+                        <h4>{result.artists}</h4>
+                      </div>
                     </div>
                   </li>
                 );

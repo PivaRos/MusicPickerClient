@@ -14,12 +14,12 @@ body{
     height: 100vh;
     width: 100vw;
     background-color: white;
-    overflow: hidden;
+    overflow-y: hidden;
 
 }
 .addQueue{
-    height: calc(100vh - 200px);
-    top:200px;
+    height: calc(100vh - 100px);
+    top:100px;
     position: absolute;
     width: 100vw;
     background-color: white;
@@ -64,19 +64,22 @@ overflow-y: hidden;
 }
 .results-ui{
     overflow-y:visible;
+    list-style: none;
 }
 
 .result-li{
     font-family: sans-serif;
     height: 60px;
-    width:90vw;
-    padding: 7px;
+    width:95vw;
+    margin-left: 2.5vw;
+    padding:8px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     text-align: center;
+
 }
 .result-li:hover{
     border: 2px solid green;
@@ -99,6 +102,17 @@ overflow-y: hidden;
     display: flex;
 }
 
+
+.image-results{
+    position: absolute;
+    left: 10px;
+}
+.results-div{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+}
 
 
 .slider {
@@ -132,16 +146,17 @@ overflow-y: hidden;
     background: #04AA6D;
     cursor: pointer;
   }
+  
 
   .img_player{
     margin-top: 5px;
-    left: 30px;
+    left: 5vw;
     position: absolute;
   }
 
   .track_info{
     position: absolute;
-    left: 120px;
+    left: calc(35px + 15vw);
     top: 10px;
     font-family: sans-serif;
   }
@@ -158,7 +173,7 @@ overflow-y: hidden;
   
   .addToQueue_drawer{
     overflow-y: hidden;
-      height: calc(100vh - 220px);
+      height: calc(100vh - 120px);
       width: calc(100vw - 20px);
       margin:10px;
       background-color: white;
@@ -203,11 +218,11 @@ overflow-y: hidden;
     -o-border-radius: 50%;
 }
 .add_To_Queue{
-    width: 90%;
+    width: 90vw;
     height: 50px;
     background-color: rgb(118, 207, 118);
     position: absolute;
-    bottom: 10px;
+    bottom: 100px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -234,7 +249,7 @@ overflow-y: hidden;
          width:100vw;
          background-color: lightgreen;
          height: 50px;
-         position: absolute;
+         position: fixed;
          bottom: 0;
          text-align: center;
          transform: translateY(50px);
