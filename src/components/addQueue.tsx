@@ -64,7 +64,7 @@ const AddQueue = ({
     try {
       if (query && query !== "") {
         const result = await axios.get(
-          `http://${HOST}:${SERVER_PORT}/search/${query}`,
+          `${HOST}${SERVER_PORT}/search/${query}`,
           {}
         );
         setSearchResults(result.data);
@@ -153,7 +153,7 @@ const AddQueue = ({
           onClick={async () => {
             try {
               const result = await axios.get(
-                `http://${HOST}:${SERVER_PORT}/queue/add/${selectedTrack?.uri}`
+                `${HOST}${SERVER_PORT}/queue/add/${selectedTrack?.uri}`
               );
               if (result.status === 200) {
                 drawerRef.current?.classList.remove("drawer_open");

@@ -22,9 +22,7 @@ const Header = ({
   const checkState = async () => {
     try {
       //updatecurrentPlaying
-      const result = await axios.get(
-        `http://${HOST}:${SERVER_PORT}/player/current`
-      );
+      const result = await axios.get(`${HOST}${SERVER_PORT}/player/current`);
       if (result.status === 200) setCurrentPlaying(result.data);
       else throw new Error("error");
     } catch {
