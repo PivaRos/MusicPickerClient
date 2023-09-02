@@ -26,7 +26,7 @@ jobs:
           cd /home/daniel/MusicPickerClient
           git pull origin main
           git status
-          npm install --only=prod
+          npm install -legacy-peer-deps
           npm run build
           cp -R ./build ../MusicPicker/build
           cd ../MusicPicker
