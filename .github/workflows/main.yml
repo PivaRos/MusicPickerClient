@@ -29,4 +29,4 @@ jobs:
           npm install -legacy-peer-deps
           npm run build
           cp -R ./build ../MusicPicker/dist/build
-          cd ../MusicPicker
+          pm2 restart musicpicker
