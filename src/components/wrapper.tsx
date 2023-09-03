@@ -54,7 +54,10 @@ const Wrapper: React.FC<{}> = () => {
         setMyQueue={setMyQueue}
       />
       <Routes>
-        <Route element={<Queue />} path="/queue" />
+        <Route
+          element={<Queue currentPlaying={currentPlaying} />}
+          path="/queue"
+        />
         <Route element={<Vote />} path="/vote" />
         <Route
           element={

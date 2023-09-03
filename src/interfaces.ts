@@ -1,3 +1,5 @@
+import { Track as SpotiTrack } from "spotify-types";
+
 export interface SearchResult extends Track {}
 
 export interface Track {
@@ -22,5 +24,5 @@ export interface currentPlayingObject {
   name: string;
   genres: string[];
   artists: string[];
-  queue: Track[];
+  queue: SpotiTrack[];
 }

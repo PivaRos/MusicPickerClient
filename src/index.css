@@ -108,6 +108,7 @@ overflow-y: hidden;
     left: 10px;
 }
 .results-div{
+
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -324,4 +325,30 @@ html{
     bottom: 0;
     color: rgb(24, 44, 39);
 
+}
+
+.TracksGrid{
+    width: 90vw;
+    position: relative;
+
+    list-style: none;
+    
+}
+
+.queuePage{
+    bottom: 50px;
+    width: 100vw;
+    position: absolute;
+    overflow-y: scroll;
+    height:calc(100vh - 150px);
+}
+.time-label{
+    position: absolute;
+    right: 5px;
+    top:10px;
+    color:green;
+}
+
+
+.queuePage li {
 }
