@@ -28,5 +28,5 @@ jobs:
           git status
           npm install -legacy-peer-deps
           npm run build
-          cp -R ./build ../MusicPicker/build
+          cp -R ./build ../MusicPicker/dist/build
           cd ../MusicPicker
