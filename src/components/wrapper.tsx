@@ -7,13 +7,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Track, currentPlayingObject } from "../interfaces";
 import { Queue } from "./queue";
 import { Vote } from "./vote";
-import { useLocalStorage } from "../hooks/useLocalStorage";
-
 const Wrapper: React.FC<{}> = () => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<Track>();
-  const [myQueue, setMyQueue] = useLocalStorage("myQueue", []);
+  const [myQueue, setMyQueue] = useState<Track[]>([]);
   const [currentPlaying, setCurrentPlaying] = useState<currentPlayingObject>();
   const [message, setMessage] = useState<{ message: string; error: boolean }>({
     error: false,
