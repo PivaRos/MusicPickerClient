@@ -5,15 +5,15 @@ import Header from "./header";
 import Footer from "./footer";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Track, currentPlayingObject } from "../interfaces";
-import { MyQueue } from "./myQueue";
 import { Queue } from "./queue";
 import { Vote } from "./vote";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const Wrapper: React.FC<{}> = () => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<Track>();
-  const [myQueue, setMyQueue] = useState<Track[]>([]);
+  const [myQueue, setMyQueue] = useLocalStorage("myQueue", []);
   const [currentPlaying, setCurrentPlaying] = useState<currentPlayingObject>();
   const [message, setMessage] = useState<{ message: string; error: boolean }>({
     error: false,
@@ -50,8 +50,6 @@ const Wrapper: React.FC<{}> = () => {
       <Header
         currentPlaying={currentPlaying}
         setCurrentPlaying={setCurrentPlaying}
-        myQueue={myQueue}
-        setMyQueue={setMyQueue}
       />
       <Routes>
         <Route
@@ -77,17 +75,6 @@ const Wrapper: React.FC<{}> = () => {
             />
           }
           path="/queue/add"
-        />
-        <Route
-          element={
-            <MyQueue
-              currentPlaying={currentPlaying}
-              myQueue={myQueue}
-              setCurrentPlaying={setCurrentPlaying}
-              setMyQueue={setMyQueue}
-            />
-          }
-          path="/my/queue"
         />
         <Route
           path="/*"

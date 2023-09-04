@@ -3,8 +3,6 @@ import "../index.css";
 import { HOST, SERVER_PORT } from "../envVars";
 import { SearchResult, Track, currentPlayingObject } from "../interfaces";
 import axios from "axios";
-import { MyQueue } from "./myQueue";
-import { error } from "console";
 
 interface AddQueueProps {
   query: string;
@@ -88,21 +86,7 @@ const AddQueue = ({
             onChange={(text) => setQuery(text.target.value)}
           />
         </div>
-        <MyQueue
-          currentPlaying={currentPlaying}
-          setCurrentPlaying={setCurrentPlaying}
-          myQueue={myQueue}
-          setMyQueue={setMyQueue}
-        />
         <div className="myQueue">
-          {myQueue.length > 0 && (
-            <MyQueue
-              currentPlaying={currentPlaying}
-              myQueue={myQueue}
-              setCurrentPlaying={setCurrentPlaying}
-              setMyQueue={setMyQueue}
-            />
-          )}
           {query.length > 2 && (
             <ul className="results-ui">
               {searchResults.map((result: SearchResult, index: number) => {
@@ -157,6 +141,16 @@ const AddQueue = ({
               );
               if (result.status === 200) {
                 drawerRef.current?.classList.remove("drawer_open");
+
+                setMyQueue((queue) => {
+                  if (selectedTrack) {
+                    let tempQueue = [...queue];
+                    tempQueue.push(selectedTrack);
+                    return tempQueue;
+                  }
+                  return queue;
+                });
+
                 setQuery("");
                 setSearchResults([]);
                 setMessage({

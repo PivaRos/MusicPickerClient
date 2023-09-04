@@ -15,9 +15,30 @@ interface TracksGridProps {
   withTime?: boolean;
 }
 
-const icon1 = <MdSignalCellularAlt1Bar color="green" height={5} width={5} />;
-const icon2 = <MdSignalCellularAlt2Bar color="green" height={5} width={5} />;
-const icon3 = <MdSignalCellularAlt color="green" height={5} width={5} />;
+const icon1 = (
+  <MdSignalCellularAlt1Bar
+    className="time-icon"
+    color="green"
+    height={5}
+    width={5}
+  />
+);
+const icon2 = (
+  <MdSignalCellularAlt2Bar
+    className="time-icon"
+    color="green"
+    height={5}
+    width={5}
+  />
+);
+const icon3 = (
+  <MdSignalCellularAlt
+    className="time-icon"
+    color="green"
+    height={5}
+    width={5}
+  />
+);
 
 export const TracksGrid = ({
   current_maxtime,
@@ -47,7 +68,7 @@ export const TracksGrid = ({
       if (animationIcon.name === "icon3") {
         setAnimationIcon({ name: "icon1", node: icon1 });
       }
-    }, 1000);
+    }, 1300);
     return () => clearInterval(interval);
   }, [animationIcon]);
   return (

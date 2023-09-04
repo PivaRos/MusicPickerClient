@@ -5,20 +5,13 @@ import axios from "axios";
 import { HOST, SERVER_PORT, UPDATE_MS } from "../envVars";
 
 interface HeaderProps {
-  myQueue: Track[];
-  setMyQueue: React.Dispatch<React.SetStateAction<Track[]>>;
   setCurrentPlaying: React.Dispatch<
     React.SetStateAction<currentPlayingObject | undefined>
   >;
   currentPlaying: currentPlayingObject | undefined;
 }
 
-const Header = ({
-  myQueue,
-  setMyQueue,
-  currentPlaying,
-  setCurrentPlaying,
-}: HeaderProps) => {
+const Header = ({ currentPlaying, setCurrentPlaying }: HeaderProps) => {
   const checkState = async () => {
     try {
       //updatecurrentPlaying

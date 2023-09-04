@@ -340,7 +340,7 @@ html{
     width: 100vw;
     position: absolute;
     overflow-y: scroll;
-    height:calc(100vh - 150px);
+    height:calc(100vh - 240px);
 }
 .time-label{
     position: absolute;
@@ -350,5 +350,6 @@ html{
 }
 
 
-.queuePage li {
+.time-icon{
+    padding-top: 4px;
 }

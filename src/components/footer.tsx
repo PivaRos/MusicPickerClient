@@ -10,11 +10,6 @@ const Footer: React.FC<{}> = () => {
   return (
     <div className="footer-container">
       <div className="footer">
-        <BottomTab
-          Pagelink="my/queue"
-          title="הרשימה שלי"
-          Icon={MdOutlineSelfImprovement}
-        />
         <BottomTab Pagelink="queue/add" title="הוספה" Icon={MdQueue} />
         <BottomTab Pagelink="queue/" title="הרשימה" Icon={PiQueueBold} />
         <BottomTab Pagelink="vote/" title="הצבעות" Icon={MdHowToVote} />
