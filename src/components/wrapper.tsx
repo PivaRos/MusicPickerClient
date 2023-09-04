@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Track, currentPlayingObject } from "../interfaces";
 import { Queue } from "./queue";
 import { Vote } from "./vote";
+import { Link } from "react-router-dom";
 const Wrapper: React.FC<{}> = () => {
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -43,6 +44,11 @@ const Wrapper: React.FC<{}> = () => {
     };
   }, [message]);
 
+  const Redirect = () => {
+    <Link to={"/queue"} />;
+    return <div></div>;
+  };
+
   return (
     <div className="wrapper">
       <Header
@@ -54,7 +60,8 @@ const Wrapper: React.FC<{}> = () => {
           element={<Queue currentPlaying={currentPlaying} />}
           path="/queue"
         />
-        <Route element={<Vote />} path="/vote" />
+        <Route element={<Vote />} path="musicpicker/vote" />
+        <Route element={<Redirect />} path="/" />
         <Route
           element={
             <AddQueue
