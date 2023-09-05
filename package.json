@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cross-env PUBLIC_URL=https://danielgurbin.com/musicpicker react-scripts build",
+    "build": "cross-env PUBLIC_URL=https://musicpicker.danielgurbin.com react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

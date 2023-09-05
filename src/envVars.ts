@@ -1,4 +1,4 @@
 export const SERVER_PORT = "";
-export const HOST = "https://danielgurbin.com/musicpicker/api";
+export const HOST = "https://musicpicker.danielgurbin.com/api";
 export const UPDATE_MS = 1000;
-// https://danielgurbin.com/musicpicker/api
+// https://musicpicker.danielgurbin.com/api
