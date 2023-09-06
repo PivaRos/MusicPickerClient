@@ -3,12 +3,22 @@ import "../index.css";
 import AddQueue from "./addQueue";
 import Header from "./header";
 import Footer from "./footer";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Track, currentPlayingObject } from "../interfaces";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { Track, Vote as IVote, currentPlayingObject } from "../interfaces";
 import { Queue } from "./queue";
 import { Vote } from "./vote";
-import { Link } from "react-router-dom";
+import { useUserId } from "../hooks/useUserId";
+import axios from "axios";
+import { HOST } from "../envVars";
 const Wrapper: React.FC<{}> = () => {
+  const [userId, setUserId] = useUserId();
+  const [activeVotes, setActiveVotes] = useState<IVote[]>();
+  const [activeUsers, setActiveUsers] = useState<number>(0);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [selectedTrack, setSelectedTrack] = useState<Track>();
@@ -19,6 +29,28 @@ const Wrapper: React.FC<{}> = () => {
     message: "",
   });
   const messageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    console.log(userId);
+    const interval = setInterval(() => {
+      if (userId) {
+        //get votes state;
+        axios(HOST + "/vote/", {
+          method: "GET",
+          headers: {
+            Authorization: userId,
+          },
+        })
+          .then((result) => {
+            const { votes, activeusers } = result.data;
+            if (votes) setActiveVotes(votes);
+            if (activeusers) setActiveUsers(activeusers);
+          })
+          .catch(() => {});
+      }
+    }, 1200);
+    return () => clearInterval(interval);
+  }, [userId]);
 
   useEffect(() => {
     let mover1: NodeJS.Timeout, mover2: NodeJS.Timeout;
@@ -44,11 +76,6 @@ const Wrapper: React.FC<{}> = () => {
     };
   }, [message]);
 
-  const Redirect = () => {
-    <Link to={"/queue"} />;
-    return <div></div>;
-  };
-
   return (
     <div className="wrapper">
       <Header
@@ -60,8 +87,18 @@ const Wrapper: React.FC<{}> = () => {
           element={<Queue currentPlaying={currentPlaying} />}
           path="/queue"
         />
-        <Route element={<Vote />} path="musicpicker/vote" />
-        <Route element={<Redirect />} path="/" />
+        <Route
+          element={
+            <Vote
+              userId={userId || ""}
+              activeUsers={activeUsers}
+              activeVotes={activeVotes}
+              setActiveVotes={setActiveVotes}
+            />
+          }
+          path="/vote"
+        />
+        <Route element={<Navigate to="/queue" replace />} path="/" />
         <Route
           element={
             <AddQueue

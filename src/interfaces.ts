@@ -2,6 +2,17 @@ import { Track as SpotiTrack } from "spotify-types";
 
 export interface SearchResult extends Track {}
 
+export interface Vote {
+  votes: number;
+  type: votes;
+}
+
+export enum votes {
+  VolumeUp = "VOLUMEUP",
+  VolumeDown = "VOLUMEDOWN",
+  Skip = "SKIP",
+}
+
 export interface Track {
   uri: string;
   name: string;
