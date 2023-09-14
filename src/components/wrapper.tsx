@@ -118,6 +118,7 @@ const Wrapper: React.FC<{}> = () => {
           }
           path="/queue/add"
         />
+
         <Route
           path="/*"
           element={

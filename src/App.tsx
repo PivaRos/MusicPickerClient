@@ -1,12 +1,16 @@
 import React from "react";
 import Wrapper from "./components/wrapper";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AdminPage } from "./components/adminPage";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Wrapper />
+        <Routes>
+          <Route element={<AdminPage />} path="/admin" />
+          <Route path="/*" element={<Wrapper />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );

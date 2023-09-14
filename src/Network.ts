@@ -10,9 +10,11 @@ export const API = {
           Authorization: adminPassword,
         },
         method: "get",
+        validateStatus: () => true,
       });
       if (result.status === 200) return result.data;
-      else undefined;
+      else {
+      }
     },
     changeMinutes: async (adminPassword: string, newMinutes: number) => {
       const result = await axios(HOST + "/admin/minutes", {
@@ -21,6 +23,7 @@ export const API = {
           Authorization: adminPassword,
         },
         method: "put",
+        validateStatus: () => true,
         data: JSON.stringify({ minutes: newMinutes }),
       });
       if (result.status === 200) return true;
@@ -36,6 +39,7 @@ export const API = {
           Authorization: adminPassword,
         },
         method: "put",
+        validateStatus: () => true,
         data: JSON.stringify({ password: newAdminPassword }),
       });
 
@@ -49,7 +53,22 @@ export const API = {
           Authorization: adminPassword,
         },
         method: "put",
+        validateStatus: () => true,
         data: JSON.stringify({ genres: genres }),
+      });
+
+      if (result.status === 200) return true;
+      return false;
+    },
+    setAppConfig: async (adminPassword: string, appConfig: any) => {
+      const result = await axios(HOST + "/admin/appConfig", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: adminPassword,
+        },
+        method: "put",
+        validateStatus: () => true,
+        data: JSON.stringify({ appConfig: appConfig }),
       });
 
       if (result.status === 200) return true;

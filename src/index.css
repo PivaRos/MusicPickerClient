@@ -472,3 +472,114 @@ html {
   text-align: center;
   margin-top: 12px;
 }
+.loginPage {
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+.loginForm {
+  justify-content: center;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+.password-input {
+  outline: none;
+  padding: 10px;
+  font-size: 20px;
+  direction: rtl;
+}
+
+.button-login {
+  width: 200px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+  background-color: lightgreen;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.adminPage {
+  width: 100vw;
+  height: 100vh;
+}
+.button-div-login {
+  justify-content: center;
+  display: flex;
+  width: 100vw;
+  padding: 10px;
+}
+.dashboard {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+h1 {
+  font-size: 24px;
+  color: #1db954;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #1db954;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #168f3a;
+}
+
+.edit-button {
+  margin-top: 20px;
+}
+
+.data-container {
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.data-label {
+  font-weight: bold;
+}
+
+.data-value {
+  margin-left: 10px;
+}
+
+.add_span_genres {
+  font-size: 23px;
+  size: 16px;
+}
