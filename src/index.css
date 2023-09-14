@@ -526,28 +526,33 @@ html {
   background-color: #f4f4f4;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  overflow-y: scroll;
 }
 
-h1 {
+.dashboard-h1 {
   font-size: 24px;
   color: #1db954;
   margin-bottom: 20px;
 }
 
-label {
+.label-admin-edit {
   display: block;
   margin-bottom: 10px;
 }
 
-input[type="text"],
-input[type="number"] {
+.scrollable-admin-label {
+  height: 400px;
+}
+
+.input-text-admin,
+.input-number-admin {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-button {
+.button-admin {
   background-color: #1db954;
   color: #fff;
   border: none;
@@ -556,7 +561,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.button-admin:hover {
   background-color: #168f3a;
 }
 
