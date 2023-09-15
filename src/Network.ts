@@ -81,7 +81,7 @@ export const API = {
         method: "get",
       });
       if (result.status >= 200 && result.status < 300) {
-        return result.data;
+        return result.data.validGenres;
       } else {
         return [];
       }
@@ -91,7 +91,7 @@ export const API = {
         method: "get",
       });
       if (result.status >= 200 && result.status < 300) {
-        return result.data;
+        return result.data.validVotes;
       } else {
         return [];
       }
