@@ -75,4 +75,26 @@ export const API = {
       return false;
     },
   },
+  Enums: {
+    getValidGenres: async () => {
+      const result = await axios(HOST + "/api/enums/validGenres", {
+        method: "get",
+      });
+      if (result.status >= 200 && result.status < 300) {
+        return result.data;
+      } else {
+        return [];
+      }
+    },
+    getValidVotes: async () => {
+      const result = await axios(HOST + "/api/enums/validVotes", {
+        method: "get",
+      });
+      if (result.status >= 200 && result.status < 300) {
+        return result.data;
+      } else {
+        return [];
+      }
+    },
+  },
 };
