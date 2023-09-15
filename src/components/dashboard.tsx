@@ -1,35 +1,36 @@
 import React, { useState, useEffect } from "react";
-import dotenv from 'dotenv';
 import { API } from "../Network";
 
+interface IDashboard {
+  data: any;
+  setData: React.Dispatch<React.SetStateAction<any>>;
+}
 
-const validGenres = []
-
-const validVotes = ["SKIP", "VOLUMEUP", "VOLUMEDOWN"];
-
-function Dashboard({ data, setData }) {
+function Dashboard({ data, setData }: IDashboard) {
   const [editedData, setEditedData] = useState(data);
   const [adminPassword, setAdminPassword] = useState(data.adminPassword);
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [validGenres, setValidGenres] = useState<Array<String>>([]); 
-  const [validVotes, setValidVotes] = useState<Array<String>>([]); 
+  const [validGenres, setValidGenres] = useState<Array<string>>([]);
+  const [validVotes, setValidVotes] = useState<Array<string>>([]);
 
   useEffect(() => {
     setAdminPassword(adminPassword);
   }, [data.adminPassword]);
 
-  useEffect( async () => {
-    const genresResult  = await API.Enums.getValidGenres();
-    if (genresResult){
-      setValidGenres(genresResult);
-    }
-    const voteResult  = await API.Enums.getValidVotes();
-    if (voteResult){
-      setValidVotes(voteResult);
-    }
-  }, [])
+  useEffect(() => {
+    (async () => {
+      const genresResult = await API.Enums.getValidGenres();
+      if (genresResult) {
+        setValidGenres(genresResult);
+      }
+      const voteResult = await API.Enums.getValidVotes();
+      if (voteResult) {
+        setValidVotes(voteResult);
+      }
+    })();
+  }, []);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -48,7 +49,7 @@ function Dashboard({ data, setData }) {
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
 
     // Ensure that the selected genre is one of the valid genres
@@ -56,29 +57,29 @@ function Dashboard({ data, setData }) {
       return;
     }
 
-    setEditedData((prevData) => ({
+    setEditedData((prevData: any) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleGenresChange = (genre) => {
+  const handleGenresChange = (genre: string) => {
     const updatedGenres = editedData.genres.includes(genre)
-      ? editedData.genres.filter((g) => g !== genre)
+      ? editedData.genres.filter((g: any) => g !== genre)
       : [...editedData.genres, genre];
 
-    setEditedData((prevData) => ({
+    setEditedData((prevData: any) => ({
       ...prevData,
       genres: updatedGenres,
     }));
   };
 
-  const handleVotesChange = (vote) => {
+  const handleVotesChange = (vote: string) => {
     const updatedVotes = editedData.votes.includes(vote)
-      ? editedData.votes.filter((v) => v !== vote)
+      ? editedData.votes.filter((v: any) => v !== vote)
       : [...editedData.votes, vote];
 
-    setEditedData((prevData) => ({
+    setEditedData((prevData: any) => ({
       ...prevData,
       votes: updatedVotes,
     }));
@@ -122,13 +123,13 @@ function Dashboard({ data, setData }) {
           <label className="label-admin-edit">
             Votes:
             {validVotes.map((vote) => (
-              <label className="label-admin-edit" key={vote}>
+              <label className="label-admin-edit" key={vote.toString()}>
                 <input
                   type="checkbox"
                   name="votes"
-                  value={vote}
+                  value={vote.toString()}
                   checked={editedData.votes.includes(vote)}
-                  onChange={() => handleVotesChange(vote)}
+                  onChange={() => handleVotesChange(vote.toString())}
                 />{" "}
                 {vote}
               </label>
@@ -140,13 +141,13 @@ function Dashboard({ data, setData }) {
           >
             Genres:
             {validGenres.map((genre) => (
-              <label className="label-admin-edit" key={genre}>
+              <label className="label-admin-edit" key={genre.toString()}>
                 <input
                   type="checkbox"
                   name="genres"
-                  value={genre}
+                  value={genre.toString()}
                   checked={editedData.genres.includes(genre)}
-                  onChange={() => handleGenresChange(genre)}
+                  onChange={() => handleGenresChange(genre.toString())}
                 />{" "}
                 {genre}
               </label>

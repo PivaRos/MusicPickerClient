@@ -77,8 +77,9 @@ export const API = {
   },
   Enums: {
     getValidGenres: async () => {
-      const result = await axios(HOST + "/api/enums/validGenres", {
+      const result = await axios(HOST + "/enums/validGenres", {
         method: "get",
+        validateStatus: () => true,
       });
       if (result.status >= 200 && result.status < 300) {
         return result.data.validGenres;
@@ -87,8 +88,9 @@ export const API = {
       }
     },
     getValidVotes: async () => {
-      const result = await axios(HOST + "/api/enums/validVotes", {
+      const result = await axios(HOST + "/enums/validVotes", {
         method: "get",
+        validateStatus: () => true,
       });
       if (result.status >= 200 && result.status < 300) {
         return result.data.validVotes;
