@@ -32,11 +32,7 @@ export const AdminPage = () => {
           setAdminPassword={setAdminPassword}
         />
       )}
-      {appConfig && (
-        <div className="adminPage">
-          <Dashboard setData={setAppConfig} data={appConfig} />
-        </div>
-      )}
+      {appConfig && <Dashboard setData={setAppConfig} data={appConfig} />}
     </div>
   );
 };

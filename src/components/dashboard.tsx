@@ -89,7 +89,7 @@ function Dashboard({ data, setData }: IDashboard) {
     <div className="dashboard">
       <h1 className="dashboard-h1">Spotify Dashboard</h1>
       {isEditing ? (
-        <div style={{ overflowY: "scroll" }}>
+        <div>
           <label className="label-admin-edit">
             Platform:
             <input

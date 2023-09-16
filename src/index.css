@@ -508,10 +508,6 @@ html {
   -o-border-radius: 10px;
 }
 
-.adminPage {
-  width: 100vw;
-  height: 100vh;
-}
 .button-div-login {
   justify-content: center;
   display: flex;
@@ -519,10 +515,11 @@ html {
   padding: 10px;
 }
 .dashboard {
+  margin-top: 100px;
   font-family: Arial, sans-serif;
   max-width: 600px;
-  margin: 0 auto;
   padding: 20px;
+  height: calc(100vh - 100px);
   background-color: #f4f4f4;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
