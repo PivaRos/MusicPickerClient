@@ -84,8 +84,8 @@ export const TracksGrid = ({
                 width="35px"
               />
               <div>
-                <h3>{track.name}</h3>
-                <h4>
+                <h3 className="overflow-wrap">{track.name}</h3>
+                <h4 className="overflow-wrap">
                   {track.artists.map((artist, index) => {
                     return artist.name;
                   })}

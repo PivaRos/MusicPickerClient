@@ -103,8 +103,8 @@ const AddQueue = ({
                         width="35px"
                       />
                       <div>
-                        <h3>{result.name}</h3>
-                        <h4>{result.artists}</h4>
+                        <h3 className="overflow-wrap">{result.name}</h3>
+                        <h4 className="overflow-wrap">{result.artists}</h4>
                       </div>
                     </div>
                   </li>
@@ -128,8 +128,8 @@ const AddQueue = ({
         <div className="image_add_queue">
           <img height={200} width={200} src={selectedTrack?.images[0].url} />
           <div className="track_info_add_to_queue">
-            <h2>{selectedTrack?.name}</h2>
-            <h3>{selectedTrack?.artists}</h3>
+            <h2 className="overflow-wrap">{selectedTrack?.name}</h2>
+            <h3 className="overflow-wrap">{selectedTrack?.artists}</h3>
           </div>
         </div>
 

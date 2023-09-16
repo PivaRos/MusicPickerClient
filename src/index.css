@@ -143,6 +143,7 @@ body {
   margin-top: 5px;
   left: 5vw;
   position: absolute;
+  border-radius: 5px;
 }
 
 .track_info {
@@ -584,4 +585,12 @@ html {
 .add_span_genres {
   font-size: 23px;
   size: 16px;
+}
+
+.overflow-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+  width: calc(100vw - 165px);
 }

@@ -76,8 +76,12 @@ const Header = ({ currentPlaying, setCurrentPlaying }: HeaderProps) => {
         )}
         {currentPlaying && (
           <div className="track_info">
-            <h3>{currentPlaying && currentPlaying.name}</h3>
-            <h4>{currentPlaying && currentPlaying.artists}</h4>
+            <h3 className="overflow-wrap">
+              {currentPlaying && currentPlaying.name}
+            </h3>
+            <h4 className="overflow-wrap">
+              {currentPlaying && currentPlaying.artists}
+            </h4>
           </div>
         )}
       </div>
