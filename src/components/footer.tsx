@@ -12,6 +12,7 @@ const Footer: React.FC<{}> = () => {
       <div className="footer">
         <BottomTab Pagelink="queue/add" title="הוספה" Icon={MdQueue} />
         <BottomTab Pagelink="queue/" title="הרשימה" Icon={PiQueueBold} />
+        <BottomTab Pagelink="vote/" title="הצבעות" Icon={MdHowToVote} />
       </div>
     </div>
   );

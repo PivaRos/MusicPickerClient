@@ -108,7 +108,17 @@ const Wrapper: React.FC<{}> = () => {
           }
           path="/queue/add"
         />
-
+        <Route
+          element={
+            <Vote
+              userId={userId || ""}
+              activeUsers={activeUsers}
+              activeVotes={activeVotes}
+              setActiveVotes={setActiveVotes}
+            />
+          }
+          path="/vote"
+        />
         <Route
           path="/*"
           element={
