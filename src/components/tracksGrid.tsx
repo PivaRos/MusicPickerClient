@@ -75,7 +75,7 @@ export const TracksGrid = ({
     <ul className="TracksGrid">
       {queue.map((track: SpotiTrack, index) => {
         return (
-          <li key={"track-" + index} className="result-li">
+          <li key={"track-" + index} className="result-li no-hover">
             <div className="results-div" onClick={() => {}}>
               <img
                 className="image-results"

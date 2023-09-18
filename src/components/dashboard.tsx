@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API } from "../Network";
+import { PiCaretCircleDoubleRightThin } from "react-icons/pi";
 
 interface IDashboard {
   data: any;
@@ -14,6 +15,10 @@ function Dashboard({ data, setData }: IDashboard) {
 
   const [validGenres, setValidGenres] = useState<Array<string>>([]);
   const [validVotes, setValidVotes] = useState<Array<string>>([]);
+
+  // New state variable for genre search
+  const [genreSearchQuery, setGenreSearchQuery] = useState("");
+  const [lastFoundGenreIndex, setLastFoundGenreIndex] = useState(-1);
 
   useEffect(() => {
     setAdminPassword(adminPassword);
@@ -85,21 +90,39 @@ function Dashboard({ data, setData }: IDashboard) {
     }));
   };
 
+  // Function to search for a genre
+  const searchGenre = () => {
+    if (genreSearchQuery.trim() === "") {
+      return;
+    }
+
+    const lowerCaseQuery = genreSearchQuery.toLowerCase();
+    const startIndex = lastFoundGenreIndex + 1;
+    const foundGenreIndex = validGenres.findIndex(
+      (genre, index) =>
+        index >= startIndex && genre.toLowerCase().includes(lowerCaseQuery)
+    );
+
+    if (foundGenreIndex !== -1) {
+      // Scroll to the found genre
+      const genreLabel = document.querySelector(
+        `label[data-genre="${validGenres[foundGenreIndex]}"]`
+      );
+      if (genreLabel) {
+        genreLabel.scrollIntoView({ behavior: "smooth" });
+        setLastFoundGenreIndex(foundGenreIndex);
+      }
+    } else {
+      // No more matching genres found, reset the search
+      setLastFoundGenreIndex(-1);
+    }
+  };
+
   return (
     <div className="dashboard">
-      <h1 className="dashboard-h1">Spotify Dashboard</h1>
+      <h1 className="dashboard-h1">{`${data.platform}`} Dashboard</h1>
       {isEditing ? (
         <div>
-          <label className="label-admin-edit">
-            Platform:
-            <input
-              type="text"
-              className="input-text-admin"
-              name="platform"
-              value={editedData.platform}
-              onChange={handleInputChange}
-            />
-          </label>
           <label className="label-admin-edit">
             Admin Password:
             <input
@@ -135,6 +158,17 @@ function Dashboard({ data, setData }: IDashboard) {
               </label>
             ))}
           </label>
+          <input
+            className="genres-search"
+            type="text"
+            placeholder="Search Genre"
+            value={genreSearchQuery}
+            onChange={(e) => setGenreSearchQuery(e.target.value)}
+          />
+          <button onClick={searchGenre}>Search</button>
+          <button onClick={() => setLastFoundGenreIndex(-1)}>
+            Reset Search
+          </button>
           <label
             className="label-admin-edit scrollable-admin-label"
             style={{ overflowY: "scroll" }}
@@ -149,7 +183,7 @@ function Dashboard({ data, setData }: IDashboard) {
                   checked={editedData.genres.includes(genre)}
                   onChange={() => handleGenresChange(genre.toString())}
                 />{" "}
-                {genre}
+                <label data-genre={genre}>{genre}</label>
               </label>
             ))}
           </label>

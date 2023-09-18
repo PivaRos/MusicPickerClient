@@ -81,6 +81,20 @@ body {
   border: 2px solid green;
 }
 
+.genres-search {
+  display: block;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+  direction: rtl;
+  margin: 5px;
+}
+
+.no-hover:hover {
+  background-color: transparent;
+  border: none;
+}
+
 .binder_input_results {
   width: 100vw;
   overflow-y: scroll;
@@ -593,4 +607,9 @@ html {
   overflow-wrap: break-word;
   text-overflow: ellipsis;
   width: calc(100vw - 165px);
+}
+.adminPage {
+  width: 100vw;
+  justify-content: center;
+  display: flex;
 }

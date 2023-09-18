@@ -23,7 +23,7 @@ export const AdminPage = () => {
   }, [appConfig]);
 
   return (
-    <div>
+    <div className="adminPage">
       {!appConfig && (
         <LoginPage
           appConfig={appConfig}
