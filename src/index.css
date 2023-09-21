@@ -84,10 +84,11 @@ body {
 .genres-search {
   display: block;
   outline: none;
-  padding: 5px;
-  font-size: 14px;
+  padding: 8px;
+  font-size: 16px;
   direction: rtl;
   margin: 5px;
+  width: 130px;
 }
 
 .no-hover:hover {
@@ -612,4 +613,47 @@ html {
   width: 100vw;
   justify-content: center;
   display: flex;
+}
+
+.search-button,
+.back-button,
+.reset-button,
+.addall-button,
+.removeall-button {
+  background-color: #007bff; /* Blue color */
+  color: #fff; /* White text color */
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+/* Styles for the Back button */
+button.back-button {
+  background-color: #dc3545; /* Red color */
+}
+
+/* Styles for the Reset Search button */
+button.reset-button {
+  background-color: #6c757d; /* Gray color */
+}
+
+.addall-button,
+.genres-search,
+.removeall-button {
+  display: inline-block;
+}
+
+.addall-button {
+  background-color: green;
+}
+
+.binder-all-search {
+  width: 100%;
+  text-align: center;
+}
+.removeall-button {
+  background-color: #dc3545;
 }
