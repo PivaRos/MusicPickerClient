@@ -17,7 +17,7 @@
     "vite-tsconfig-paths": "^4.2.1"
   },
   "scripts": {
-    "start": "vite",
+    "start": "vite --host",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "test": "vitest",
