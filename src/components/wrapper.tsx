@@ -9,13 +9,23 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { Track, Vote as IVote, currentPlayingObject } from "../interfaces";
+import {
+  Track,
+  Vote as IVote,
+  currentPlayingObject,
+  appConfig,
+} from "../interfaces";
 import { Queue } from "./queue";
 import { Vote } from "./vote";
 import { useUserId } from "../hooks/useUserId";
 import axios from "axios";
 const HOST = import.meta.env.VITE_HOST;
-const Wrapper: React.FC<{}> = () => {
+
+interface WrapperProps {
+  appConfig: appConfig;
+}
+
+const Wrapper: React.FC<WrapperProps> = ({ appConfig }: WrapperProps) => {
   const [userId, setUserId] = useUserId();
   const [activeVotes, setActiveVotes] = useState<IVote[]>();
   const [activeUsers, setActiveUsers] = useState<number>(0);
@@ -108,17 +118,19 @@ const Wrapper: React.FC<{}> = () => {
           }
           path="/queue/add"
         />
-        <Route
-          element={
-            <Vote
-              userId={userId || ""}
-              activeUsers={activeUsers}
-              activeVotes={activeVotes}
-              setActiveVotes={setActiveVotes}
-            />
-          }
-          path="/vote"
-        />
+        {appConfig.enableVotes === "true" && (
+          <Route
+            element={
+              <Vote
+                userId={userId || ""}
+                activeUsers={activeUsers}
+                activeVotes={activeVotes}
+                setActiveVotes={setActiveVotes}
+              />
+            }
+            path="/vote"
+          />
+        )}
         <Route
           path="/*"
           element={
@@ -128,7 +140,7 @@ const Wrapper: React.FC<{}> = () => {
           }
         />
       </Routes>
-      <Footer />
+      <Footer appConfig={appConfig} />
       <div ref={messageRef} className="message ">
         <h3>{message.message}</h3>
       </div>

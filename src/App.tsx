@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route element={<AdminPage />} path="/admin" />
           {data && data.enableApp === "true" && (
-            <Route path="/*" element={<Wrapper />} />
+            <Route path="/*" element={<Wrapper appConfig={data} />} />
           )}
           <Route
             path="/*"
