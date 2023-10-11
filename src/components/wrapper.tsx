@@ -14,7 +14,7 @@ import { Queue } from "./queue";
 import { Vote } from "./vote";
 import { useUserId } from "../hooks/useUserId";
 import axios from "axios";
-import { HOST } from "../envVars";
+const HOST = import.meta.env.VITE_HOST;
 const Wrapper: React.FC<{}> = () => {
   const [userId, setUserId] = useUserId();
   const [activeVotes, setActiveVotes] = useState<IVote[]>();

@@ -5,10 +5,12 @@
   "dependencies": {
     "@vitejs/plugin-react-swc": "^3.4.0",
     "axios": "^1.5.0",
+    "dotenv": "^16.3.1",
     "react": "^18.2.0",
     "react-bottom-drawer": "^0.1.1",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.16.0",
     "react-use-websocket": "^4.4.0",
     "spotify-types": "^1.0.7",

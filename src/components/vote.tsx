@@ -2,7 +2,7 @@ import { useState } from "react";
 import Drawer from "react-bottom-drawer";
 import { Vote as IVote, votes } from "../interfaces";
 import axios from "axios";
-import { HOST } from "../envVars";
+const HOST = import.meta.env.VITE_HOST;
 
 interface VoteProps {
   activeVotes: IVote[] | undefined;

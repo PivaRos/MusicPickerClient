@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../index.css";
 import { Track, currentPlayingObject } from "../interfaces";
 import axios from "axios";
-import { HOST, SERVER_PORT, UPDATE_MS } from "../envVars";
+
+const HOST = import.meta.env.VITE_HOST;
+const UPDATE_MS = import.meta.env.VITE_UPDATE_MS || 1000;
 
 interface HeaderProps {
   setCurrentPlaying: React.Dispatch<
@@ -15,7 +17,7 @@ const Header = ({ currentPlaying, setCurrentPlaying }: HeaderProps) => {
   const checkState = async () => {
     try {
       //updatecurrentPlaying
-      const result = await axios.get(`${HOST}${SERVER_PORT}/player/current`);
+      const result = await axios.get(`${HOST}/player/current`);
       if (result.status === 200) setCurrentPlaying(result.data);
       else throw new Error("error");
     } catch {
@@ -42,7 +44,7 @@ const Header = ({ currentPlaying, setCurrentPlaying }: HeaderProps) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       checkState();
-    }, UPDATE_MS);
+    }, +UPDATE_MS);
 
     return () => clearInterval(intervalId);
   }, []);

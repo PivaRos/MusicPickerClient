@@ -57,17 +57,19 @@ function Dashboard({ data, setData }: IDashboard) {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
 
-    // Ensure that the selected genre is one of the valid genres
-    if (name === "genres" && !validGenres.includes(value)) {
-      return;
+    if (type === "checkbox") {
+      setEditedData((prevData: any) => ({
+        ...prevData,
+        [name]: checked ? "true" : "false",
+      }));
+    } else {
+      setEditedData((prevData: any) => ({
+        ...prevData,
+        [name]: value,
+      }));
     }
-
-    setEditedData((prevData: any) => ({
-      ...prevData,
-      [name]: value,
-    }));
   };
 
   const handleGenresChange = (genre: string) => {
@@ -202,7 +204,7 @@ function Dashboard({ data, setData }: IDashboard) {
           </label>
           <label className="label-admin-edit">
             Votes:
-            {validVotes.map((vote) => (
+            {validVotes.map((vote: string) => (
               <label className="label-admin-edit" key={vote.toString()}>
                 <input
                   type="checkbox"
@@ -215,6 +217,25 @@ function Dashboard({ data, setData }: IDashboard) {
               </label>
             ))}
           </label>
+          <label className="label-admin-edit">
+            Enable Votes:
+            <input
+              type="checkbox"
+              name="enableVotes"
+              checked={editedData.enableVotes === "true"}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label className="label-admin-edit">
+            Enable App:
+            <input
+              type="checkbox"
+              name="enableApp"
+              checked={editedData.enableApp === "true"}
+              onChange={handleInputChange}
+            />
+          </label>
+
           <div className="binder-all-search">
             <button className="addall-button" onClick={addAllGenres}>
               Add All {genreSearchQuery} Genres
@@ -284,8 +305,12 @@ function Dashboard({ data, setData }: IDashboard) {
             <span className="data-value">{editedData.votes.join(", ")}</span>
           </p>
           <p>
-            Genres:{" "}
-            <span className="data-value">{editedData.genres.join(", ")}</span>
+            Enable Votes:{" "}
+            <span className="data-value">{editedData.enableVotes}</span>
+          </p>
+          <p>
+            Enable App:{" "}
+            <span className="data-value">{editedData.enableApp}</span>
           </p>
           <button
             className="edit-button button-admin"

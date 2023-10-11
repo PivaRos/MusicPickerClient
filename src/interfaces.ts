@@ -13,6 +13,21 @@ export enum votes {
   Skip = "SKIP",
 }
 
+export enum AppPlatform {
+  SPOTIFY = "spotify",
+  YOUTUBE_MUSIC = "youtube-music",
+}
+
+export type appConfig = {
+  platform: AppPlatform;
+  genres?: string[];
+  minutes_between_queue_adds: number;
+  votes: [votes];
+  enableVotes: string;
+  enableApp: string;
+  adminPassword: string;
+};
+
 export interface Track {
   uri: string;
   name: string;

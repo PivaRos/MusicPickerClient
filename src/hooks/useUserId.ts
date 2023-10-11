@@ -1,7 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import axios from "axios";
-import { WebSocketHost } from "../envVars";
 import useWebSocket from "react-use-websocket";
+
+const WEBSOCKETHOST =
+  import.meta.env.VITE_WEBSOCKETHOST || "wss://localhost:8000/ws/";
 
 export const useUserId: () => [
   string | undefined,
@@ -9,7 +11,7 @@ export const useUserId: () => [
 ] = () => {
   const [userId, setUserId] = useState<string>();
 
-  useWebSocket(WebSocketHost, {
+  useWebSocket(WEBSOCKETHOST, {
     onMessage: (message) => {
       const { userid } = JSON.parse(message.data);
       if (userid) setUserId(userid);

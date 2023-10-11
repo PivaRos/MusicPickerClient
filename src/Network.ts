@@ -1,5 +1,6 @@
 import axios from "axios";
-import { HOST } from "./envVars";
+import { appConfig } from "./interfaces";
+const HOST = import.meta.env.VITE_HOST;
 
 export const API = {
   Admin: {
@@ -96,6 +97,19 @@ export const API = {
         return result.data.validVotes;
       } else {
         return [];
+      }
+    },
+  },
+  public: {
+    getAppConfig: async () => {
+      const result = await axios(HOST + "/appconfig", {
+        method: "get",
+        validateStatus: () => true,
+      });
+      if (result.status >= 200 && result.status < 300) {
+        return result.data as appConfig;
+      } else {
+        return;
       }
     },
   },

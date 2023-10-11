@@ -1,8 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import "../index.css";
-import { HOST, SERVER_PORT } from "../envVars";
 import { SearchResult, Track, currentPlayingObject } from "../interfaces";
 import axios from "axios";
+
+const HOST = import.meta.env.HOST;
 
 interface AddQueueProps {
   query: string;
@@ -61,10 +62,7 @@ const AddQueue = ({
   const RunEvent = async (query: string) => {
     try {
       if (query && query !== "") {
-        const result = await axios.get(
-          `${HOST}${SERVER_PORT}/search/${query}`,
-          {}
-        );
+        const result = await axios.get(`${HOST}/search/${query}`, {});
         setSearchResults(result.data);
       }
     } catch {}
@@ -137,7 +135,7 @@ const AddQueue = ({
           onClick={async () => {
             try {
               const result = await axios.get(
-                `${HOST}${SERVER_PORT}/queue/add/${selectedTrack?.uri}`
+                `${HOST}/queue/add/${selectedTrack?.uri}`
               );
               if (result.status === 200) {
                 drawerRef.current?.classList.remove("drawer_open");
