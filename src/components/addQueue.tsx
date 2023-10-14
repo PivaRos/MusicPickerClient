@@ -3,7 +3,7 @@ import "../index.css";
 import { SearchResult, Track, currentPlayingObject } from "../interfaces";
 import axios from "axios";
 
-const HOST = import.meta.env.HOST;
+const HOST = import.meta.env.VITE_HOST;
 
 interface AddQueueProps {
   query: string;
